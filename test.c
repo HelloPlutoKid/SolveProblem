@@ -12,7 +12,8 @@ int main(int argc , char *argv[]){
 	char data2;
 	char setChar[2] = {0,};
 	int arr1[10]={0,};
-	int arr2[10]={0,};
+	int arr2[100]={0,};
+	int arr4[100]={0,};
 	int arr3[3][40] = {0,};
 
 	if(argc < 2)
@@ -27,38 +28,29 @@ int main(int argc , char *argv[]){
 	int j = 0;
 	int k = 0;
 	while(!feof(fd)){
-
 		data2=fgetc(fd);
-		if(i==0 && ((data2-'0')<0)){
+		if((i==0) && ((data2-'0')<0)){
 			arr1[j++] = atoi(setChar);			
 			k=0;
 			printf(" arr 1 : %d setChar : %s \n",arr1[j-1],setChar );		
 			setChar[0] = setChar[1] = setChar[2] = '\0';
-			//memset(setChar,'\0',1);
-			for(int j = 0; j < 3; j++){
-				printf("%d\t", arr2[j]);	
-			}
 		}
-/*		else if((i==1) && ((data2-'0')<0)){			
-			arr2[j++] = atoi(setChar);
-			printf(" arr 2 : %d setChar : %s \n",arr2[j-1],setChar );		
+		else if((i == 1) && ((data2-'0')<0)){			
+			arr4[j++] = atoi(setChar);
+
+			arr2[j-1] = arr4[j-1];
+			printf(" arr 4 : %d setChar : %s \n",arr4[j-1],setChar );		
 			k=0;
 			setChar[0] = setChar[1] = setChar[2] = '\0';			
-		}*/
-		else if(i >= 2 && ((data2-'0')<0)){
-			//printf("%s\n", setChar);	
+		}
+		else if((i >= 2) && ((data2-'0')<0)){			
 			arr3[i-2][j++] = atoi(setChar);		
 			printf(" arr 3 : %d setChar : %s \n",arr3[i-2][j-1] ,setChar );				
 			k=0;
-			setChar[0] = setChar[1] = setChar[2] = '\0';
-			for(int j = 0; j < 3; j++){
-				printf("%d\t", arr2[j]);	
-			}
+			setChar[0] = setChar[1] = setChar[2] = '\0';			
 		}
 		else{
-			//memset(setChar,'\0',2);			
 			setChar[k++]=data2;
-
 		}
 		if(data2 == '\n' ){
 			++i;
@@ -69,6 +61,9 @@ int main(int argc , char *argv[]){
 		//fgets(data,80,fd);
 		//printf("%c",data2);
 	}
+	for(int j = 0; j < 3; j++){
+		printf("%d\t", arr2[j]);	
+	}
 	
 	for(int i = 0; i < arr1[1]; i++){
 		printf("\n");
@@ -76,10 +71,7 @@ int main(int argc , char *argv[]){
 			printf("%d\t", arr3[i][j]);
 		}
 	}
-	printf("\n");
-	for(int j = 0; j < 3; j++){
-		printf("%d\t", arr2[j]);	
-	}
+
 	int temp=0;
 	for(int j = 0; j < 3; j++){
 		printf("arr2 : %d\n", arr2[j]);
@@ -93,23 +85,13 @@ int main(int argc , char *argv[]){
 		}
 	}
 	printf("\n");
-	for(int i = 0; i < arr1[1]; i++){
+	for(int i = 0; i < 9; i++){
 		printf("\n");
 		for(int j = 0; j < 3; j++){
 			printf("%d\t", arr3[i][j]);
 		}
 	}
-	//for(int i=0; i< sizeof(arr3)/sizeof(int); i++)
-	/*i = j =0;
-	while(1){
-		printf("%d \t", arr3[i][j++]);
-		if(arr3[i][j] == 0)
-			break;
-		if(j == 3){
-			i++;
-			j=0;
-		}
-	}*/
+	//for(int i=0; i< sizeof(arr3)/sizeof(int); i++)	
 
 	fclose(fd);
 }
