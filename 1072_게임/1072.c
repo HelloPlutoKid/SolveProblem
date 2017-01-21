@@ -17,6 +17,8 @@ int main(int argc, char const *argv[])
 	float rounded_down = floorf(val * 100) / 100;   내림: 37.77 
 	float nearest = roundf(val * 100) / 100;   반올림: 37.78 
 	float rounded_up = ceilf(val * 100) / 100;       올림: 37.78 
+
+	floor은 double형, floorf는 float형, floorl은 long double형에 씁니다.ㅎ
 	 */
 	double x ;
 	printf("%lf\n", percent);
